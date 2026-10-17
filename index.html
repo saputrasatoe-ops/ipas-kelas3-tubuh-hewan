@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Interaktif IPAS Kelas 3 SD - Bagian Tubuh Hewan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #a8ff78 0%, #78ffd6 100%);
+            touch-action: manipulation;
+        }
+        .font-heading {
+            font-family: 'Fredoka', cursive;
+        }
+        /* Lock aspect ratio 16:9 container */
+        .aspect-16-9-container {
+            width: 100%;
+            max-width: 1100px;
+            aspect-ratio: 16 / 9;
+            max-height: 90vh;
+        }
+        @media (max-aspect-ratio: 16/9) {
+            .aspect-16-9-container {
+                width: 100%;
+                height: auto;
+            }
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #10B981;
+            border-radius: 10px;
+        }
+        .bounce-slow {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-2 sm:p-4 select-none">
+
+    <div class="aspect-16-9-container bg-white rounded-3xl shadow-2xl border-4 sm:border-8 border-emerald-400 overflow-hidden flex flex-col justify-between relative">
+        
+        <!-- HEADER NAVBAR -->
+        <header class="bg-emerald-500 text-white px-4 py-2 sm:py-3 flex justify-between items-center shadow-md z-20">
+            <div class="flex items-center space-x-2">
+                <div class="bg-yellow-400 text-emerald-900 font-extrabold px-3 py-1 rounded-full text-xs sm:text-sm font-heading shadow">
+                    IPAS Kelas 3 SD
+                </div>
+                <h1 class="text-sm sm:text-xl font-heading font-bold tracking-wide hidden sm:block text-yellow-100">
+                    🐾 Bagian Tubuh Hewan & Fungsinya
+                </h1>
+            </div>
+
+            <!-- Header Controls -->
+            <div class="flex items-center space-x-2">
+                <button id="btnSoundToggle" onclick="toggleAudio()" class="bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded-xl transition shadow flex items-center space-x-1 text-xs sm:text-sm">
+                    <i id="soundIcon" class="fas fa-volume-up text-lg"></i>
+                    <span class="hidden md:inline font-bold">Suara</span>
+                </button>
+                <button onclick="navTo('tujuan'); playClickSound(); speakText('Tujuan Pembelajaran');" class="bg-purple-500 hover:bg-purple-600 text-white p-2 rounded-xl transition shadow flex items-center space-x-1 text-xs sm:text-sm font-bold">
+                    <i class="fas fa-bullseye text-lg"></i>
+                    <span class="hidden md:inline">Tujuan</span>
+                </button>
+                <button onclick="showInfoModal()" class="bg-amber-400 hover:bg-amber-500 text-amber-950 p-2 rounded-xl transition shadow flex items-center space-x-1 text-xs sm:text-sm font-bold">
+                    <i class="fas fa-info-circle text-lg"></i>
+                    <span class="hidden md:inline">Info</span>
+                </button>
+                <button onclick="navTo('menu')" class="bg-sky-400 hover:bg-sky-500 text-white px-3 py-2 rounded-xl transition shadow flex items-center space-x-1 text-xs sm:text-sm font-bold">
+                    <i class="fas fa-home"></i>
+                    <span class="hidden sm:inline">Menu</span>
+                </button>
+            </div>
+        </header>
+
+        <main id="mainContent" class="flex-1 relative overflow-hidden bg-gradient-to-b from-sky-100 via-emerald-50 to-amber-50 p-3 sm:p-6 flex items-center justify-center">
+            
+            <!-- VIEW 1: HOME / BERANDA -->
+            <section id="view-home" class="w-full h-full flex flex-col justify-center items-center text-center space-y-4">
+                <div class="bg-white/80 backdrop-blur-sm p-4 sm:p-8 rounded-3xl border-4 border-emerald-300 shadow-xl max-w-2xl w-full">
+                    <span class="bg-amber-100 text-amber-800 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full inline-block mb-2 font-heading">
+                        🌟 Media Pembelajaran Interaktif
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-heading font-extrabold text-emerald-800 mb-2">
+                        Mengenal Bagian Tubuh Hewan & Fungsinya
+                    </h2>
+                    <p class="text-gray-600 text-xs sm:text-base mb-6">
+                        Mari belajar sambil bermain! Temukan berbagai macam hewan, kenali bagian tubuhnya, pelajari fungsinya, dan uji pemahamanmu.
+                    </p>
+
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <button onclick="navTo('tujuan'); playClickSound(); speakText('Tujuan Pembelajaran IPAS Kelas 3');" class="bg-purple-500 hover:bg-purple-600 text-white font-heading font-bold text-sm sm:text-base px-5 py-2.5 rounded-2xl shadow-lg hover:scale-105 transition transform flex items-center space-x-2 border-b-4 border-purple-700">
+                            <i class="fas fa-bullseye text-yellow-300 text-xl"></i>
+                            <span>Tujuan Pembelajaran</span>
+                        </button>
+                        <button onclick="navTo('materi'); playClickSound(); speakText('Mari belajar materi bagian tubuh hewan!');" class="bg-emerald-500 hover:bg-emerald-600 text-white font-heading font-bold text-sm sm:text-base px-5 py-2.5 rounded-2xl shadow-lg hover:scale-105 transition transform flex items-center space-x-2 border-b-4 border-emerald-700">
+                            <i class="fas fa-book-open text-yellow-300 text-xl"></i>
+                            <span>Mulai Belajar</span>
+                        </button>
+                        <button onclick="navTo('kuis'); playClickSound(); speakText('Ayo uji kemampuanmu di Kuis Interaktif!');" class="bg-amber-500 hover:bg-amber-600 text-white font-heading font-bold text-sm sm:text-base px-5 py-2.5 rounded-2xl shadow-lg hover:scale-105 transition transform flex items-center space-x-2 border-b-4 border-amber-700">
+                            <i class="fas fa-gamepad text-yellow-200 text-xl"></i>
+                            <span>Kuis Bermain</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="text-xs sm:text-sm text-emerald-800 font-bold bg-emerald-200/80 px-4 py-1.5 rounded-full shadow">
+                    Pengembang: <span class="text-emerald-950 font-extrabold">Mashindra Prisma Saputra</span>
+                </div>
+            </section>
+
+            <!-- VIEW 2: MENU UTAMA -->
+            <section id="view-menu" class="hidden w-full h-full flex flex-col justify-center items-center">
+                <h2 class="text-2xl sm:text-3xl font-heading font-bold text-emerald-800 mb-4 text-center">
+                    Pilih Menu Pembelajaran 🎈
+                </h2>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 w-full max-w-4xl">
+                    <!-- Menu Tujuan Pembelajaran -->
+                    <div onclick="navTo('tujuan'); playClickSound();" class="bg-white hover:bg-purple-50 border-4 border-purple-400 p-3 sm:p-5 rounded-3xl shadow-xl cursor-pointer transform hover:-translate-y-2 transition duration-200 flex flex-col items-center text-center group">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl mb-2 group-hover:scale-110 transition">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-base sm:text-lg text-purple-900">Tujuan Pembelajaran</h3>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mt-1">Tujuan & arah pembelajaran</p>
+                    </div>
+
+                    <!-- Menu Materi -->
+                    <div onclick="navTo('materi'); playClickSound();" class="bg-white hover:bg-emerald-50 border-4 border-emerald-400 p-3 sm:p-5 rounded-3xl shadow-xl cursor-pointer transform hover:-translate-y-2 transition duration-200 flex flex-col items-center text-center group">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl mb-2 group-hover:scale-110 transition">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-base sm:text-lg text-emerald-900">Materi Hewan</h3>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mt-1">Burung, Kucing, Ikan, & Katak</p>
+                    </div>
+
+                    <!-- Menu Kuis -->
+                    <div onclick="navTo('kuis'); playClickSound();" class="bg-white hover:bg-amber-50 border-4 border-amber-400 p-3 sm:p-5 rounded-3xl shadow-xl cursor-pointer transform hover:-translate-y-2 transition duration-200 flex flex-col items-center text-center group">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl mb-2 group-hover:scale-110 transition">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-base sm:text-lg text-amber-900">Kuis Interaktif</h3>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mt-1">Uji pemahaman dengan kuis seru</p>
+                    </div>
+
+                    <!-- Menu Rangkuman -->
+                    <div onclick="navTo('rangkuman'); playClickSound();" class="bg-white hover:bg-sky-50 border-4 border-sky-400 p-3 sm:p-5 rounded-3xl shadow-xl cursor-pointer transform hover:-translate-y-2 transition duration-200 flex flex-col items-center text-center group">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl mb-2 group-hover:scale-110 transition">
+                            <i class="fas fa-list-check"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-base sm:text-lg text-sky-900">Rangkuman</h3>
+                        <p class="text-[10px] sm:text-xs text-gray-500 mt-1">Ringkasan fungsi tubuh hewan</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="view-tujuan" class="hidden w-full h-full flex flex-col bg-white rounded-2xl p-4 sm:p-6 border-2 border-purple-300 overflow-y-auto">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="text-xl sm:text-2xl font-heading font-bold text-purple-900 flex items-center space-x-2">
+                        <i class="fas fa-bullseye text-purple-600"></i>
+                        <span>Tujuan Pembelajaran IPAS Kelas 3 SD</span>
+                    </h2>
+                    <button onclick="speakText('Tujuan Pembelajaran. 1. Peserta didik dapat mengidentifikasi bagian-bagian tubuh hewan. 2. Peserta didik dapat menjelaskan fungsi dari masing-masing bagian tubuh hewan. 3. Peserta didik dapat mengaitkan bentuk tubuh hewan dengan tempat hidup dan cara hidupnya.')" class="bg-purple-100 hover:bg-purple-200 text-purple-800 px-3 py-1 rounded-xl text-xs font-bold flex items-center space-x-1">
+                        <i class="fas fa-volume-up"></i>
+                        <span>Dengarkan</span>
+                    </button>
+                </div>
+
+                <div class="space-y-4 text-xs sm:text-sm text-gray-700 my-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-emerald-50 p-4 rounded-2xl border-2 border-emerald-200 flex flex-col justify-between shadow-sm">
+                            <div>
+                                <span class="bg-emerald-200 text-emerald-900 text-xs font-bold px-2.5 py-1 rounded-full font-heading">Tujuan 1</span>
+                                <h3 class="font-bold text-emerald-900 font-heading text-base sm:text-lg mt-2">Mengidentifikasi Bagian Tubuh</h3>
+                                <p class="mt-2 text-gray-700 text-xs sm:text-sm leading-relaxed">
+                                    Peserta didik dapat mengidentifikasi bagian-bagian tubuh luar pada berbagai jenis hewan (Burung, Kucing, Ikan, dan Katak) dengan tepat.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-amber-50 p-4 rounded-2xl border-2 border-amber-200 flex flex-col justify-between shadow-sm">
+                            <div>
+                                <span class="bg-amber-200 text-amber-900 text-xs font-bold px-2.5 py-1 rounded-full font-heading">Tujuan 2</span>
+                                <h3 class="font-bold text-amber-900 font-heading text-base sm:text-lg mt-2">Menjelaskan Fungsi Tubuh</h3>
+                                <p class="mt-2 text-gray-700 text-xs sm:text-sm leading-relaxed">
+                                    Peserta didik dapat menjelaskan fungsi utama dari masing-masing bagian tubuh hewan dalam mendukung kelangsungan hidupnya.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-sky-50 p-4 rounded-2xl border-2 border-sky-200 flex flex-col justify-between shadow-sm">
+                            <div>
+                                <span class="bg-sky-200 text-sky-900 text-xs font-bold px-2.5 py-1 rounded-full font-heading">Tujuan 3</span>
+                                <h3 class="font-bold text-sky-900 font-heading text-base sm:text-lg mt-2">Mengaitkan Bentuk & Habitat</h3>
+                                <p class="mt-2 text-gray-700 text-xs sm:text-sm leading-relaxed">
+                                    Peserta didik dapat mengaitkan hubungan antara bentuk tubuh hewan dengan tempat hidup (habitat) dan cara bergerak/hidupnya.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-100/80 p-3 sm:p-4 rounded-2xl border-2 border-amber-300 text-amber-950 flex flex-col sm:flex-row items-center justify-between gap-2 shadow-sm">
+                        <p class="font-medium text-xs sm:text-sm">
+                            💡 <b>Petunjuk Belajar:</b> Pelajari materi terlebih dahulu dengan menekan tombol organ tubuh hewan, lalu uji pemahamanmu pada menu <b>Kuis Interaktif</b>!
+                        </p>
+                        <button onclick="navTo('materi'); playClickSound();" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm px-4 py-2 rounded-xl shadow transition flex-shrink-0">
+                            Mulai Belajar ➡️
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW 4: MATERI PEMBELAJARAN -->
+            <section id="view-materi" class="hidden w-full h-full flex flex-col">
+                <!-- Navigation Tab Hewan -->
+                <div class="flex space-x-2 overflow-x-auto pb-2 mb-2 border-b border-emerald-200" id="animalTabs">
+                    <!-- Tab Items rendered dynamically -->
+                </div>
+
+                <!-- Detail Content Canvas -->
+                <div class="flex-1 bg-white rounded-2xl border-2 border-emerald-300 p-3 sm:p-4 flex flex-col md:flex-row gap-4 overflow-y-auto" id="materiDetail">
+                    <!-- Rendered by JS -->
+                </div>
+            </section>
+
+            <!-- VIEW 5: KUIS INTERAKTIF -->
+            <section id="view-kuis" class="hidden w-full h-full flex flex-col items-center justify-center">
+                <div id="quizContainer" class="w-full max-w-2xl bg-white rounded-3xl border-4 border-amber-400 p-4 sm:p-6 shadow-xl relative flex flex-col justify-between h-full max-h-[90%]">
+                    <!-- Rendered by JS -->
+                </div>
+            </section>
+
+            <!-- VIEW 6: RANGKUMAN -->
+            <section id="view-rangkuman" class="hidden w-full h-full flex flex-col bg-white rounded-2xl p-4 sm:p-6 border-2 border-sky-300 overflow-y-auto">
+                <h2 class="text-xl sm:text-2xl font-heading font-bold text-sky-800 mb-3 flex items-center space-x-2">
+                    <i class="fas fa-bookmark text-amber-500"></i>
+                    <span>Rangkuman Inti IPAS Kelas 3</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm text-gray-700">
+                    <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                        <h3 class="font-bold text-amber-900 font-heading mb-1 text-sm sm:text-base">🦅 Burung</h3>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li><b>Paruh:</b> Mengambil makanan (sesuai bentuk makanan).</li>
+                            <li><b>Sayap:</b> Untuk terbang dan bergerak di udara.</li>
+                            <li><b>Bulu:</b> Menutupi tubuh dan menjaga suhu tetap hangat.</li>
+                            <li><b>Cakar/Kaki:</b> Mencengkeram mangsa atau hinggap di dahan.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-orange-50 p-3 rounded-xl border border-orange-200">
+                        <h3 class="font-bold text-orange-900 font-heading mb-1 text-sm sm:text-base">🐱 Kucing (Mamalia)</h3>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li><b>Mata & Misai (Kumis):</b> Membantu melihat di gelap & meraba lingkungan.</li>
+                            <li><b>Kaki & Cakar:</b> Berjalan, melompat, dan menerkam musuh.</li>
+                            <li><b>Rambut/Bulu:</b> Melindungi kulit dan menjaga panas tubuh.</li>
+                            <li><b>Ekor:</b> Membantu menjaga keseimbangan tubuh saat melompat.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-blue-50 p-3 rounded-xl border border-blue-200">
+                        <h3 class="font-bold text-blue-900 font-heading mb-1 text-sm sm:text-base">🐟 Ikan</h3>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li><b>Insang:</b> Alat pernapasan di dalam air.</li>
+                            <li><b>Sirip:</b> Membantu berenang dan beralih arah.</li>
+                            <li><b>Ekor:</b> Pendorong utama saat berenang maju.</li>
+                            <li><b>Sisik:</b> Pelindung tubuh dan mengurangi gesekan air.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
+                        <h3 class="font-bold text-emerald-900 font-heading mb-1 text-sm sm:text-base">🐸 Katak (Amfibi)</h3>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li><b>Kulit Lembap:</b> Membantu bernapas selain menggunakan paru-paru.</li>
+                            <li><b>Kaki Belakang Panjang:</b> Untuk melompat jauh dan berenang.</li>
+                            <li><b>Selaput Renang:</b> Memudahkan mendayung air saat berenang.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER / CREDIT BAR -->
+        <footer class="bg-emerald-600 text-white px-4 py-2 text-xs flex flex-wrap justify-between items-center z-20 border-t border-emerald-500">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-graduation-cap text-yellow-300"></i>
+                <span class="font-medium">Media Pembelajaran IPAS SD/MI</span>
+            </div>
+            <div>
+                Pengembang: <span class="font-bold text-yellow-300">Mashindra Prisma Saputra</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <div id="infoModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 border-4 border-emerald-400 shadow-2xl relative animate-fade-in">
+            <button onclick="hideInfoModal()" class="absolute top-3 right-3 bg-gray-200 hover:bg-gray-300 text-gray-700 w-8 h-8 rounded-full font-bold flex items-center justify-center">✕</button>
+            
+            <div class="text-center mb-4">
+                <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-2">
+                    <i class="fas fa-circle-info"></i>
+                </div>
+                <h3 class="text-xl font-heading font-bold text-emerald-900">Informasi Media</h3>
+            </div>
+
+            <div class="space-y-3 text-xs sm:text-sm text-gray-700">
+                <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200">
+                    <p class="font-bold text-emerald-900">📌 Mata Pelajaran</p>
+                    <p>IPAS (Ilmu Pengetahuan Alam dan Sosial)</p>
+                    <p class="font-bold text-emerald-900 mt-1">📚 Topik</p>
+                    <p>Bagian Tubuh Hewan dan Fungsinya (Kelas 3 SD)</p>
+                </div>
+
+                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+                    <p class="font-bold text-amber-900">👨‍💻 Pengembang</p>
+                    <p class="text-base font-extrabold text-amber-950">Mashindra Prisma Saputra</p>
+                </div>
+
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200">
+                    <p class="font-bold text-sky-900">💡 Petunjuk Penggunaan</p>
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li>Cek menu <b>Tujuan Belajar</b> untuk capaian pembelajaran.</li>
+                        <li>Klik <b>Mulai Belajar</b> untuk mengamati organ tubuh hewan.</li>
+                        <li>Tekan tombol organ tubuh untuk mendengarkan & membaca fungsi.</li>
+                        <li>Kerjakan <b>Kuis Interaktif</b> untuk evaluasi nilai.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <button onclick="hideInfoModal()" class="w-full mt-4 bg-emerald-500 hover:bg-emerald-600 text-white font-heading font-bold py-2.5 rounded-xl transition shadow">
+                Ngerti, Siap Belajar! 🚀
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // AUDIO SYNTHESIS & SOUND EFFECTS ENGINE
+        let soundEnabled = true;
+        const synth = window.speechSynthesis;
+
+        function toggleAudio() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('soundIcon');
+            if (soundEnabled) {
+                icon.className = 'fas fa-volume-up text-lg';
+                playClickSound();
+                speakText("Suara diaktifkan");
+            } else {
+                icon.className = 'fas fa-volume-mute text-lg';
+                if (synth) synth.cancel();
+            }
+        }
+
+        // Web Audio API for UI click feedback
+        function playClickSound() {
+            if (!soundEnabled) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.1);
+            } catch(e) {}
+        }
+
+        function playSuccessSound() {
+            if (!soundEnabled) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const now = ctx.currentTime;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, now);
+                osc.frequency.setValueAtTime(659.25, now + 0.1);
+                osc.frequency.setValueAtTime(783.99, now + 0.2);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.4);
+            } catch(e) {}
+        }
+
+        function playWrongSound() {
+            if (!soundEnabled) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const now = ctx.currentTime;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(220, now);
+                osc.frequency.setValueAtTime(180, now + 0.15);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.3);
+            } catch(e) {}
+        }
+
+        // Text To Speech
+        function speakText(text) {
+            if (!soundEnabled || !synth) return;
+            synth.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'id-ID';
+            utterance.rate = 0.95;
+            utterance.pitch = 1.1;
+            synth.speak(utterance);
+        }
+
+        // DATA MATERI HEWAN
+        const dataHewan = [
+            {
+                id: 'burung',
+                nama: 'Burung',
+                icon: '🦅',
+                svg: `
+                <svg viewBox="0 0 300 250" class="w-full h-full max-h-56 mx-auto">
+                    <path d="M 100 120 Q 80 80 120 60 Q 180 50 200 100 Q 220 150 180 180 Q 120 200 100 120 Z" fill="#F59E0B" stroke="#D97706" stroke-width="4"/>
+                    <circle cx="115" cy="75" r="8" fill="white"/>
+                    <circle cx="113" cy="75" r="4" fill="black"/>
+                    <polygon points="100,75 70,85 100,92" fill="#EF4444" stroke="#B91C1C" stroke-width="2"/>
+                    <path d="M 140 100 C 120 140, 180 170, 210 130 C 190 110, 160 90, 140 100 Z" fill="#3B82F6" stroke="#1D4ED8" stroke-width="3"/>
+                    <polygon points="190,160 250,180 240,200 180,175" fill="#10B981" stroke="#047857" stroke-width="3"/>
+                    <polyline points="130,185 125,220 115,225 M 125,220 125,227 M 125,220 135,225" stroke="#4B5563" stroke-width="4" stroke-linecap="round"/>
+                    <polyline points="160,180 160,220 150,225 M 160,220 160,227 M 160,220 170,225" stroke="#4B5563" stroke-width="4" stroke-linecap="round"/>
+                </svg>`,
+                bagian: [
+                    { nama: 'Paruh', fungsi: 'Mematuk dan mengambil makanan sesuai jenis makanannya.' },
+                    { nama: 'Sayap', fungsi: 'Alat gerak utama untuk terbang di udara.' },
+                    { nama: 'Bulu', fungsi: 'Menutupi tubuh agar hangat dan membantu saat terbang.' },
+                    { nama: 'Ekor', fungsi: 'Kemudi untuk mengatur arah saat terbang.' },
+                    { nama: 'Cakar / Kaki', fungsi: 'Mencengkeram ranting pohon atau memangsa makanan.' }
+                ]
+            },
+            {
+                id: 'kucing',
+                nama: 'Kucing',
+                icon: '🐱',
+                svg: `
+                <svg viewBox="0 0 300 250" class="w-full h-full max-h-56 mx-auto">
+                    <ellipse cx="160" cy="140" rx="70" ry="45" fill="#FB923C" stroke="#EA580C" stroke-width="4"/>
+                    <circle cx="90" cy="100" r="40" fill="#FB923C" stroke="#EA580C" stroke-width="4"/>
+                    <polygon points="65,70 80,35 95,65" fill="#F97316"/>
+                    <polygon points="100,65 115,35 130,70" fill="#F97316"/>
+                    <ellipse cx="75" cy="95" rx="6" ry="9" fill="#10B981"/>
+                    <ellipse cx="105" cy="95" rx="6" ry="9" fill="#10B981"/>
+                    <line x1="50" y1="105" x2="20" y2="100" stroke="#4B5563" stroke-width="2"/>
+                    <line x1="50" y1="110" x2="20" y2="115" stroke="#4B5563" stroke-width="2"/>
+                    <line x1="130" y1="105" x2="160" y2="100" stroke="#4B5563" stroke-width="2"/>
+                    <line x1="130" y1="110" x2="160" y2="115" stroke="#4B5563" stroke-width="2"/>
+                    <rect x="110" y="170" width="16" height="45" rx="8" fill="#F97316"/>
+                    <rect x="140" y="170" width="16" height="45" rx="8" fill="#F97316"/>
+                    <rect x="180" y="170" width="16" height="45" rx="8" fill="#F97316"/>
+                    <rect x="205" y="170" width="16" height="45" rx="8" fill="#F97316"/>
+                    <path d="M 225 130 Q 270 100 260 60" fill="none" stroke="#FB923C" stroke-width="12" stroke-linecap="round"/>
+                </svg>`,
+                bagian: [
+                    { nama: 'Mata Tajam', fungsi: 'Melihat dengan jelas, bahkan di tempat yang redup/gelap.' },
+                    { nama: 'Kumis (Misai)', fungsi: 'Alat peraba sensitif untuk mendeteksi keadaan sekitar.' },
+                    { nama: 'Rambut / Bulu', fungsi: 'Melindungi tubuh dari dingin dan sentuhan luar.' },
+                    { nama: 'Kaki & Cakar', fungsi: 'Berjalan, melompat tinggi, dan menerkam mangsa.' },
+                    { nama: 'Ekor', fungsi: 'Penyeimbang tubuh saat Kucing berjalan atau melompat.' }
+                ]
+            },
+            {
+                id: 'ikan',
+                nama: 'Ikan',
+                icon: '🐟',
+                svg: `
+                <svg viewBox="0 0 300 250" class="w-full h-full max-h-56 mx-auto">
+                    <path d="M 60 125 C 100 50, 220 60, 240 125 C 220 190, 100 200, 60 125 Z" fill="#38BDF8" stroke="#0284C7" stroke-width="4"/>
+                    <circle cx="95" cy="110" r="8" fill="white"/>
+                    <circle cx="93" cy="110" r="4" fill="black"/>
+                    <path d="M 120 100 Q 110 125 120 150" fill="none" stroke="#0284C7" stroke-width="4" stroke-linecap="round"/>
+                    <polygon points="130,70 170,30 190,75" fill="#F43F5E" stroke="#BE123C" stroke-width="3"/>
+                    <polygon points="235,125 280,75 270,125 280,175" fill="#F43F5E" stroke="#BE123C" stroke-width="3"/>
+                    <polygon points="135,135 160,155 135,160" fill="#FACC15" stroke="#CA8A04" stroke-width="2"/>
+                    <path d="M 160 100 Q 165 110 160 120 M 180 100 Q 185 110 180 120 M 170 125 Q 175 135 170 145" fill="none" stroke="#0284C7" stroke-width="2"/>
+                </svg>`,
+                bagian: [
+                    { nama: 'Insang', fungsi: 'Alat pernapasan khusus untuk menyerap oksigen di air.' },
+                    { nama: 'Sirip Punggung & Dada', fungsi: 'Membantu berenang dan menjaga keseimbangan posisi tubuh.' },
+                    { nama: 'Sisik Licin', fungsi: 'Pelindung tubuh dan mempermudah berenang di dalam air.' },
+                    { nama: 'Ekor', fungsi: 'Pendorong utama agar tubuh ikan maju saat berenang.' }
+                ]
+            },
+            {
+                id: 'katak',
+                nama: 'Katak (Amfibi)',
+                icon: '🐸',
+                svg: `
+                <svg viewBox="0 0 300 250" class="w-full h-full max-h-56 mx-auto">
+                    <ellipse cx="150" cy="140" rx="65" ry="50" fill="#4ADE80" stroke="#16A34A" stroke-width="4"/>
+                    <circle cx="110" cy="80" r="22" fill="#4ADE80" stroke="#16A34A" stroke-width="3"/>
+                    <circle cx="190" cy="80" r="22" fill="#4ADE80" stroke="#16A34A" stroke-width="3"/>
+                    <circle cx="110" cy="80" r="12" fill="white"/>
+                    <circle cx="190" cy="80" r="12" fill="white"/>
+                    <circle cx="110" cy="80" r="6" fill="black"/>
+                    <circle cx="190" cy="80" r="6" fill="black"/>
+                    <path d="M 110 120 Q 150 140 190 120" fill="none" stroke="#15803D" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M 100 160 L 80 200 L 65 200" fill="none" stroke="#16A34A" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M 200 160 L 220 200 L 235 200" fill="none" stroke="#16A34A" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M 160 170 Q 220 160 210 215 L 250 220" fill="none" stroke="#15803D" stroke-width="12" stroke-linecap="round"/>
+                    <path d="M 140 170 Q 80 160 90 215 L 50 220" fill="none" stroke="#15803D" stroke-width="12" stroke-linecap="round"/>
+                </svg>`,
+                bagian: [
+                    { nama: 'Mata Menonjol', fungsi: 'Melihat ke segala arah dengan jangkauan luas.' },
+                    { nama: 'Kulit Basah/Lembap', fungsi: 'Membantu menyerap oksigen (bernapas) saat di darat & air.' },
+                    { nama: 'Kaki Belakang Panjang', fungsi: 'Otot kuat untuk melompat tinggi dan jauh.' },
+                    { nama: 'Selaput Renang', fungsi: 'Berada di sela jari kaki untuk mendayung saat berenang.' }
+                ]
+            }
+        ];
+
+        // DATA KUIS PEMBELAJARAN
+        const kuisData = [
+            {
+                pertanyaan: "Bagian tubuh burung yang berfungsi untuk terbang di udara adalah...",
+                pilihan: [
+                    { teks: "A. Paruh", benar: false },
+                    { teks: "B. Sayap", benar: true },
+                    { teks: "C. Cakar", benar: false },
+                    { teks: "D. Sisik", benar: false }
+                ],
+                penjelasan: "Sayap dilengkapi bulu-bulu kuat yang memungkinkan burung untuk terbang."
+            },
+            {
+                pertanyaan: "Bagian tubuh ikan yang berfungsi sebagai alat bernapas di dalam air adalah...",
+                pilihan: [
+                    { teks: "A. Insang", benar: true },
+                    { teks: "B. Sirip", benar: false },
+                    { teks: "C. Ekor", benar: false },
+                    { teks: "D. Paruh", benar: false }
+                ],
+                penjelasan: "Insang dapat menyaring dan menyerap oksigen yang terlarut di dalam air."
+            },
+            {
+                pertanyaan: "Apakah fungsi utama dari kumis (misai) pada kucing?",
+                pilihan: [
+                    { teks: "A. Mengunyah makanan", benar: false },
+                    { teks: "B. Membantu mendengar", benar: false },
+                    { teks: "C. Alat peraba lingkungan sekitar", benar: true },
+                    { teks: "D. Menjaga tubuh agar hangat", benar: false }
+                ],
+                penjelasan: "Kumis kucing sangat sensitif dan berfungsi mendeteksi perubahan benda di sekitarnya."
+            },
+            {
+                pertanyaan: "Katak memiliki kaki belakang yang panjang dan kuat. Fungsi utamanya adalah...",
+                pilihan: [
+                    { teks: "A. Mengambil makanan", benar: false },
+                    { teks: "B. Melompat jauh dan berenang", benar: true },
+                    { teks: "C. Mencakar musuh", benar: false },
+                    { teks: "D. Menutup mata", benar: false }
+                ],
+                penjelasan: "Kaki belakang katak dirancang khusus dengan otot kuat untuk meloncat dan mendayung air."
+            },
+            {
+                pertanyaan: "Bagian tubuh burung yang bentuknya berbeda-beda sesuai jenis makanannya adalah...",
+                pilihan: [
+                    { teks: "A. Ekor", benar: false },
+                    { teks: "B. Bulu", benar: false },
+                    { teks: "C. Paruh", benar: true },
+                    { teks: "D. Mata", benar: false }
+                ],
+                penjelasan: "Bentuk paruh burung beradaptasi dengan makanan; misalnya tajam untuk pemakan daging, runcing untuk biji-bijian."
+            }
+        ];
+
+        // NAVIGATION CONTROLLER
+        let currentAnimalIndex = 0;
+        let selectedPartIndex = null;
+        let currentQuizIndex = 0;
+        let score = 0;
+
+        function navTo(viewId) {
+            ['home', 'menu', 'tujuan', 'materi', 'kuis', 'rangkuman'].forEach(id => {
+                document.getElementById(`view-${id}`).classList.add('hidden');
+            });
+            document.getElementById(`view-${viewId}`).classList.remove('hidden');
+
+            if (viewId === 'materi') {
+                renderMateri();
+            } else if (viewId === 'kuis') {
+                resetKuis();
+            }
+        }
+
+        // RENDER MATERI LOGIC
+        function renderMateri() {
+            const tabsContainer = document.getElementById('animalTabs');
+            tabsContainer.innerHTML = '';
+
+            dataHewan.forEach((hewan, idx) => {
+                const isActive = idx === currentAnimalIndex;
+                const tab = document.createElement('button');
+                tab.className = `px-4 py-2 rounded-xl font-heading font-bold text-sm whitespace-nowrap transition flex items-center space-x-2 ${
+                    isActive 
+                    ? 'bg-emerald-500 text-white shadow-md scale-105' 
+                    : 'bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-300'
+                }`;
+                tab.innerHTML = `<span>${hewan.icon}</span> <span>${hewan.nama}</span>`;
+                tab.onclick = () => {
+                    currentAnimalIndex = idx;
+                    selectedPartIndex = null;
+                    playClickSound();
+                    renderMateri();
+                    speakText(`Hewan ${hewan.nama}`);
+                };
+                tabsContainer.appendChild(tab);
+            });
+
+            const hewan = dataHewan[currentAnimalIndex];
+            const detailContainer = document.getElementById('materiDetail');
+            
+            let partDescriptionHtml = '';
+            if (selectedPartIndex !== null) {
+                const part = hewan.bagian[selectedPartIndex];
+                partDescriptionHtml = `
+                    <div class="bg-amber-100 border-2 border-amber-400 p-3 sm:p-4 rounded-2xl animate-fade-in shadow-md">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-heading font-bold text-base sm:text-lg text-amber-900 flex items-center space-x-1">
+                                <i class="fas fa-circle-dot text-amber-600"></i>
+                                <span>Bagian: ${part.nama}</span>
+                            </span>
+                            <button onclick="speakText('${part.nama}. ${part.fungsi}')" class="bg-amber-400 hover:bg-amber-500 text-amber-950 px-2 py-1 rounded-lg text-xs font-bold flex items-center space-x-1">
+                                <i class="fas fa-volume-up"></i>
+                                <span>Baca</span>
+                            </button>
+                        </div>
+                        <p class="text-xs sm:text-sm text-amber-950 leading-relaxed font-medium">${part.fungsi}</p>
+                    </div>
+                `;
+            } else {
+                partDescriptionHtml = `
+                    <div class="bg-emerald-50 border-2 border-dashed border-emerald-300 p-4 rounded-2xl text-center text-emerald-800 text-xs sm:text-sm font-medium">
+                        👈 Klik tombol <span class="bg-emerald-500 text-white px-2 py-0.5 rounded-full font-bold">Bagian Tubuh</span> di samping gambar untuk melihat fungsinya!
+                    </div>
+                `;
+            }
+
+            let partButtonsHtml = hewan.bagian.map((p, pIdx) => {
+                const isSelected = pIdx === selectedPartIndex;
+                return `
+                    <button onclick="selectPart(${pIdx})" class="w-full text-left p-2.5 sm:p-3 rounded-xl border-2 transition font-heading font-bold text-xs sm:text-sm flex justify-between items-center ${
+                        isSelected 
+                        ? 'bg-emerald-500 text-white border-emerald-600 shadow-md transform translate-x-1' 
+                        : 'bg-white hover:bg-emerald-50 text-emerald-900 border-emerald-200'
+                    }">
+                        <span>✨ ${p.nama}</span>
+                        <i class="fas fa-chevron-right text-xs opacity-70"></i>
+                    </button>
+                `;
+            }).join('');
+
+            detailContainer.innerHTML = `
+                <div class="w-full md:w-1/2 flex flex-col items-center justify-center bg-gradient-to-b from-sky-50 to-emerald-50 rounded-2xl p-2 sm:p-4 border border-emerald-200 relative min-h-[220px]">
+                    <span class="absolute top-2 left-2 bg-white/80 backdrop-blur text-emerald-800 text-xs font-extrabold px-3 py-1 rounded-full shadow">
+                        Visual ${hewan.nama}
+                    </span>
+                    ${hewan.svg}
+                </div>
+
+                <div class="w-full md:w-1/2 flex flex-col justify-between space-y-3">
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-heading font-bold text-emerald-900 mb-2 flex items-center space-x-2">
+                            <span>${hewan.icon}</span>
+                            <span>Bagian Tubuh ${hewan.nama}</span>
+                        </h3>
+                        <div class="space-y-1.5 max-h-40 overflow-y-auto pr-1">
+                            ${partButtonsHtml}
+                        </div>
+                    </div>
+                    
+                    ${partDescriptionHtml}
+                </div>
+            `;
+        }
+
+        function selectPart(pIdx) {
+            selectedPartIndex = pIdx;
+            playClickSound();
+            renderMateri();
+            const part = dataHewan[currentAnimalIndex].bagian[pIdx];
+            speakText(`${part.nama}. ${part.fungsi}`);
+        }
+
+        // KUIS INTERAKTIF LOGIC
+        function resetKuis() {
+            currentQuizIndex = 0;
+            score = 0;
+            renderKuis();
+        }
+
+        function renderKuis() {
+            const quizContainer = document.getElementById('quizContainer');
+
+            if (currentQuizIndex >= kuisData.length) {
+                const finalScore = (score / kuisData.length) * 100;
+                let pesan = "";
+                let iconPesan = "🏆";
+                
+                if (finalScore >= 80) {
+                    pesan = "Hebat Sekali! Kamu Sudah Sangat Paham Bagian Tubuh Hewan!";
+                    iconPesan = "🌟";
+                } else if (finalScore >= 60) {
+                    pesan = "Bagus! Terus Belajar Agar Nilaimu Semakin Maksimal!";
+                    iconPesan = "👍";
+                } else {
+                    pesan = "Jangan Patah Semangat! Yuk Baca Lagi Materinya!";
+                    iconPesan = "📚";
+                }
+
+                speakText(`Kuis Selesai! Nilaimu adalah ${finalScore}. ${pesan}`);
+
+                quizContainer.innerHTML = `
+                    <div class="text-center my-auto space-y-4 animate-fade-in p-4">
+                        <div class="text-5xl sm:text-6xl">${iconPesan}</div>
+                        <h2 class="text-2xl sm:text-3xl font-heading font-extrabold text-amber-900">Kuis Selesai!</h2>
+                        
+                        <div class="bg-amber-50 border-4 border-amber-300 rounded-3xl p-6 max-w-sm mx-auto shadow-inner">
+                            <p class="text-xs sm:text-sm text-amber-800 font-bold">NILAI AKHIR KAMU</p>
+                            <p class="text-5xl sm:text-6xl font-heading font-black text-amber-600 my-2">${finalScore}</p>
+                            <p class="text-xs sm:text-sm text-gray-700 font-medium">${pesan}</p>
+                        </div>
+
+                        <div class="flex flex-wrap justify-center gap-3 pt-2">
+                            <button onclick="resetKuis(); playClickSound();" class="bg-amber-500 hover:bg-amber-600 text-white font-heading font-bold px-5 py-2.5 rounded-2xl shadow border-b-4 border-amber-700 transition">
+                                🔄 Coba Kuis Lagi
+                            </button>
+                            <button onclick="navTo('materi'); playClickSound();" class="bg-emerald-500 hover:bg-emerald-600 text-white font-heading font-bold px-5 py-2.5 rounded-2xl shadow border-b-4 border-emerald-700 transition">
+                                📖 Pelajari Materi
+                            </button>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            const q = kuisData[currentQuizIndex];
+            
+            quizContainer.innerHTML = `
+                <div class="flex justify-between items-center border-b border-amber-200 pb-2">
+                    <span class="bg-amber-100 text-amber-900 text-xs font-heading font-extrabold px-3 py-1 rounded-full">
+                        Soal ${currentQuizIndex + 1} / ${kuisData.length}
+                    </span>
+                    <span class="text-xs font-bold text-gray-500">
+                        Skor: <span class="text-amber-600 text-sm font-extrabold">${score * 20}</span>
+                    </span>
+                </div>
+
+                <div class="my-3">
+                    <div class="flex items-start justify-between">
+                        <h3 class="text-base sm:text-lg font-heading font-bold text-gray-800 leading-snug">
+                            ${q.pertanyaan}
+                        </h3>
+                        <button onclick="speakText('${q.pertanyaan}')" class="ml-2 bg-amber-100 hover:bg-amber-200 text-amber-800 p-2 rounded-xl text-xs flex-shrink-0">
+                            <i class="fas fa-volume-up text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 my-2" id="optionsGroup">
+                    ${q.pilihan.map((p, idx) => `
+                        <button onclick="checkJawaban(${idx})" class="p-3 rounded-2xl border-2 border-amber-200 bg-amber-50/50 hover:bg-amber-100 text-gray-800 font-bold text-xs sm:text-sm text-left transition duration-150 flex items-center justify-between group">
+                            <span>${p.teks}</span>
+                            <i class="fas fa-circle-check opacity-0 group-hover:opacity-40 text-amber-600"></i>
+                        </button>
+                    `).join('')}
+                </div>
+
+                <div id="explanationBox" class="hidden bg-sky-50 border border-sky-300 p-3 rounded-2xl text-xs text-sky-900">
+                    <p class="font-bold font-heading mb-0.5">💡 Penjelasan:</p>
+                    <p id="explanationText">${q.penjelasan}</p>
+                </div>
+
+                <div class="flex justify-end pt-2">
+                    <button id="btnNext" onclick="nextSoal()" class="hidden bg-emerald-500 hover:bg-emerald-600 text-white font-heading font-bold px-6 py-2 rounded-xl shadow border-b-4 border-emerald-700 transition">
+                        Soal Selanjutnya ➡️
+                    </button>
+                </div>
+            `;
+
+            speakText(`Soal nomor ${currentQuizIndex + 1}. ${q.pertanyaan}`);
+        }
+
+        function checkJawaban(selectedIndex) {
+            const q = kuisData[currentQuizIndex];
+            const isCorrect = q.pilihan[selectedIndex].benar;
+            const optionsGroup = document.getElementById('optionsGroup');
+            const optionButtons = optionsGroup.querySelectorAll('button');
+
+            optionButtons.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (q.pilihan[idx].benar) {
+                    btn.className = 'p-3 rounded-2xl border-2 border-emerald-500 bg-emerald-100 text-emerald-900 font-bold text-xs sm:text-sm text-left flex items-center justify-between';
+                } else if (idx === selectedIndex) {
+                    btn.className = 'p-3 rounded-2xl border-2 border-rose-500 bg-rose-100 text-rose-900 font-bold text-xs sm:text-sm text-left flex items-center justify-between';
+                }
+            });
+
+            if (isCorrect) {
+                score++;
+                playSuccessSound();
+                speakText("Jawabanmu Benar! Hebat!");
+            } else {
+                playWrongSound();
+                speakText("Jawaban kurang tepat. Coba perhatikan penjelasannya.");
+            }
+
+            document.getElementById('explanationBox').classList.remove('hidden');
+            document.getElementById('btnNext').classList.remove('hidden');
+        }
+
+        function nextSoal() {
+            currentQuizIndex++;
+            playClickSound();
+            renderKuis();
+        }
+
+        // MODAL HELPERS
+        function showInfoModal() {
+            playClickSound();
+            document.getElementById('infoModal').classList.remove('hidden');
+        }
+
+        function hideInfoModal() {
+            playClickSound();
+            document.getElementById('infoModal').classList.add('hidden');
+        }
+
+        window.onload = function() {
+            navTo('home');
+        };
+    </script>
+</body>
+</html>
